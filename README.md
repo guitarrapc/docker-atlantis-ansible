@@ -13,3 +13,50 @@ Base Dockerfile
 **GitHub**
 
 > https://github.com/runatlantis/atlantis
+
+## atlantis and ngrok docker-compose sample.
+
+boot atlantis and ngrok.
+atlantis contains ansible and aws credential.
+Also azure credential will be pass via env_file `atlantis.env`.
+
+host directory tree
+
+```
+├── ansible
+├── atlantis.env
+├── atlantis.yaml
+├── terraform // both aws and azure supported
+└── docker-compose.yml
+```
+
+docker-compose sample
+
+```docker-compose.yaml
+version: "2"
+services:
+  atlantis:
+    container_name: atlantis
+    restart: always
+    image: "guitarrapc/atlantis-ansible-dokcer"
+    volumes:
+      - ~/.ssh:/home/atlantis/.ssh
+      - ~/.aws:/home/atlantis/.aws
+      - ~/.ansible:/home/atlantis/.ansible
+      - ${PWD}/ansible/playbooks/ansible.cfg:/home/atlantis/.ansible.cfg:rw
+    ports:
+      - 4141:4141
+    env_file:
+      - ./atlantis.env
+  ngrok:
+    container_name: ngrok
+    image: "wernight/ngrok"
+    volumes:
+      - ~/.ngrok2/:/home/ngrok/.ngrok2/
+    ports:
+      - "0.0.0.0:4040:4040"
+    links:
+      - atlantis
+    environment:
+      - NGROK_PORT=atlantis:4141
+```
