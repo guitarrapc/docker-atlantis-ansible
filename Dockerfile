@@ -7,8 +7,7 @@ RUN set -ex \
 	&& apk del build-base py-pip libffi-dev openssl-dev
 
 RUN set -ex \
-	&& apk add --no-cache jq \
-	&& apk del jq
+	&& apk add --no-cache jq
 
 RUN set -ex \
 	apk update \
