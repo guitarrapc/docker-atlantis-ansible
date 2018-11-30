@@ -6,5 +6,16 @@ RUN set -ex \
 	&& pip install ansible \
 	&& apk del build-base py-pip libffi-dev openssl-dev
 
+RUN set -ex \
+	&& apk add --no-cache jq \
+	&& apk del jq
+
+RUN set -ex \
+	apk update \
+	&& apk add bash py-pip \
+	&& apk add --virtual=build gcc libffi-dev musl-dev openssl-dev python-dev make \
+	&& pip install azure-cli \
+	&& apk del --purge build 
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["server", "--allow-repo-config"]
