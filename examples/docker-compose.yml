@@ -1,0 +1,28 @@
+version: "2"
+services:
+  atlantis:
+    container_name: atlantis
+    restart: always
+    image: "guitarrapc/atlantis-ansible-dokcer"
+    volumes:
+      - ~/.ssh:/home/atlantis/.ssh
+      - ~/.aws:/home/atlantis/.aws
+      - ~/.ansible:/home/atlantis/.ansible
+      - ${PWD}/ansible/playbooks/ansible.cfg:/home/atlantis/.ansible.cfg:rw
+    ports:
+      - 4141:4141
+    env_file:
+      - ./atlantis.env
+  ngrok:
+    container_name: ngrok
+    image: "wernight/ngrok"
+    volumes:
+      - ~/.ngrok2/:/home/ngrok/.ngrok2/
+    ports:
+      - "0.0.0.0:4040:4040"
+    links:
+      - atlantis
+    environment:
+      - NGROK_PORT=atlantis:4141
+    env_file:
+      - ./.ngrok.env

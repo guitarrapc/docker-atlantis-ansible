@@ -1,0 +1,26 @@
+version: 2
+projects:
+- name: aws-dev
+  dir: aws/envs/dev
+  autoplan:
+    enabled: true
+- name: aws-stg
+  dir: aws/envs/stg
+  autoplan:
+    enabled: true
+- name: aws-prod
+  dir: aws/envs/prod
+  autoplan:
+    enabled: true
+workflows:
+  review:
+    plan:
+      steps:
+      - run: echo starting atlantis plan
+      - init
+      - plan:
+          extra_args: ["-lock", "false"]
+    apply:
+      steps:
+      - run: echo starting atlantis apply
+      - apply
