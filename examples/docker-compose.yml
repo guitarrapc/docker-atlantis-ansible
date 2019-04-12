@@ -13,6 +13,7 @@ services:
       - 4141:4141
     env_file:
       - ./atlantis.env
+      - ./.env
   ngrok:
     container_name: ngrok
     image: "wernight/ngrok"
