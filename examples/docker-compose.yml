@@ -12,8 +12,8 @@ services:
     ports:
       - 4141:4141
     env_file:
-      - ./atlantis.env
-      - ./.env
+      - ./.atlantis.env
+      - ./.terraform.env
   ngrok:
     container_name: ngrok
     image: "wernight/ngrok"
