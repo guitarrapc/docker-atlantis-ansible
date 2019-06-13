@@ -15,11 +15,9 @@ jobs:
           version: 17.09.0-ce
           docker_layer_caching: true
       - run:
-          #command: docker build -t ${OWNER}/${IMAGE_NAME}:latest .
-          command: docker build --build-arg VCS_REF=$(git rev-parse --short HEAD) -t ${OWNER}/${IMAGE_NAME}:v$CIRCLE_TAG .
+          command: docker build --build-arg VCS_REF=$(git rev-parse --short HEAD) -t ${OWNER}/${IMAGE_NAME}:latest .
       - run:
-          #command: docker image save ${OWNER}/${IMAGE_NAME}:latest > ./docker-image.tar
-          command: docker image save ${OWNER}/${IMAGE_NAME}:v$CIRCLE_TAG > ./docker-image.tar
+          command: docker image save ${OWNER}/${IMAGE_NAME}:latest > ./docker-image.tar
       - persist_to_workspace:
           root: .
           paths:
@@ -34,8 +32,8 @@ jobs:
           at: .
       - run:
           command: docker load -i ./docker-image.tar
-      # - run:
-      #     command: docker tag -t ${OWNER}/${IMAGE_NAME}:latest ${OWNER}/${IMAGE_NAME}:v$CIRCLE_TAG
+      - run:
+          command: docker tag -t ${OWNER}/${IMAGE_NAME}:latest ${OWNER}/${IMAGE_NAME}:v$CIRCLE_TAG
       - run:
           command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
       - run:
