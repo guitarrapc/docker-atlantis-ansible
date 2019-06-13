@@ -1,5 +1,7 @@
 ## atlantis-ansible-dokcer
 
+[![CircleCI](https://circleci.com/gh/guitarrapc/atlantis-ansible-dokcer.svg?style=svg)](https://circleci.com/gh/guitarrapc/atlantis-ansible-dokcer) [![](https://images.microbadger.com/badges/image/guitarrapc/atlantis-ansible-dokcer.svg)](https://microbadger.com/images/guitarrapc/atlantis-ansible-dokcer "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/guitarrapc/atlantis-ansible-dokcer.svg)](https://microbadger.com/images/guitarrapc/atlantis-ansible-dokcer "Get your own version badge on microbadger.com")
+
 docker image for atlantis docker with ansible support.
 
 **Base Image**
