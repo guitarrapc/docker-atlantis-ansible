@@ -1,4 +1,4 @@
-FROM runatlantis/atlantis
+FROM runatlantis/atlantis:latest
 
 RUN set -ex \
 	&& apk add --no-cache py-pip build-base python-dev libffi-dev openssl-dev \
