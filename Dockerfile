@@ -17,6 +17,10 @@ RUN set -ex && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     apk del build gcc make
 
+RUN set -ex && \
+    curl -L -o /usr/local/bin/kubergrunt https://github.com/gruntwork-io/kubergrunt/releases/download/v0.5.4/kubergrunt_linux_amd64 && \
+    chmod +x /usr/local/bin/kubergrunt
+
 WORKDIR /home/atlantis
 
 ENTRYPOINT ["docker-entrypoint.sh"]
