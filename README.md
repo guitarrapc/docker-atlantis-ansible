@@ -12,9 +12,12 @@ Base Dockerfile
 
 > https://github.com/runatlantis/atlantis/blob/master/Dockerfile
 
-**GitHub**
+## Components
 
-> https://github.com/runatlantis/atlantis
+* atlantis
+* ansible
+* azure-cli
+* kubergrunt
 
 ## atlantis and ngrok docker-compose sample.
 
